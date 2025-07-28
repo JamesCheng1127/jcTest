@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <title>Phone Number Generator – Generate Valid Phone Numbers by Country</title>
+  <meta name="description" content="Free phone number generator for 200+ countries. Instantly create valid local numbers for testing, QA or development.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://phonenumbergenerator.com/">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --text:#111827;
+      --light:#6b7280;
+      --accent:#2563eb;
+      --accent-dark:#1d4ed8;
+      --radius:.75rem;
+      --shadow:0 2px 8px rgba(0,0,0,.05);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.6;
+      min-height:100vh;display:flex;flex-direction:column;
+    }
+    header{background:var(--card);box-shadow:var(--shadow)}
+    h1{font-size:2rem;font-weight:600;text-align:center;padding:1.5rem 1rem}
+    .country-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:.75rem 1rem;text-align:center}
+    .country-nav ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1rem}
+    .country-nav a{
+      font-size:.875rem;color:var(--accent);text-decoration:none;cursor:pointer;
+      padding:.25rem .5rem;border-radius:var(--radius);transition:background .2s;
+    }
+    .country-nav a.active{background:var(--accent);color:#fff}
+    main{flex:1;max-width:960px;margin:2.5rem auto;padding:0 1rem}
+    .page{display:none}
+    .page.active{display:block}
+    .grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+    .card{background:var(--card);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
+    h2{font-size:1.5rem;font-weight:600;margin-bottom:.5rem}
+    p{font-size:.95rem;color:var(--light);margin-bottom:1.25rem}
+    .btn{display:inline-block;background:var(--accent);color:#fff;font-size:.875rem;font-weight:600;padding:.6rem 1.1rem;border:none;border-radius:var(--radius);cursor:pointer;text-decoration:none;transition:background .2s}
+    .btn:hover{background:var(--accent-dark)}
+    footer{text-align:center;font-size:.75rem;color:var(--light);padding:2rem 1rem}
+
+    .language-list{
+    float: right;
+    }
+    .language-list a{
+    margin-left: 10px;
+    color: #666;
+    }
+    .language-list a.curr{
+    color: #333;
+    font-weight: bold;
+    }
+    .language-list a:hover{
+    color: #247a8c;
+    }
+
+  </style>
+</head>
+
+<body>
+<header>
+  <h1 data-i18n="title">Phone Number Generator</h1>
+
+  <div class="language-list">
+  <a data-lang="en" href="./" title="English">English</a>
+  <a data-lang="hi" href="./" title="हिन्दी" class="curr">हिन्दी</a>
+  <a data-lang="tl" href="./" title="Filipino">Filipino</a>
+ </div>
+
+  <!-- 导航：Home + 各国家 -->
+  <nav class="country-nav" aria-label="Country navigation">
+    <ul>
+      <li><a href="#home" data-page="home" data-i18n="home" class="active">Home</a></li>
+      <li><a href="#us" data-page="us" data-i18n="us">US</a></li>
+      <li><a href="#cn" data-page="cn" data-i18n="cn">China</a></li>
+      <li><a href="#gb" data-page="gb" data-i18n="gb">UK</a></li>
+      <li><a href="#in" data-page="in" data-i18n="in">India</a></li>
+      <li><a href="#de" data-page="de" data-i18n="de">Germany</a></li>
+      <!-- 更多国家请继续添加 <li><a data-page="xx">Country</a></li> -->
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- 1️⃣ HOME 页面 -->
+  <section id="home" class="page active">
+    <div class="grid">
+      <div class="card"><h2 data-i18n="us">US Phone Number Generator</h2><p data-i18n="usDesc">Generate valid US phone numbers in +1 (NXX)-NXX-XXXX format for all 50 states.</p><a class="btn" data-page="us">Go to US Generator</a></div>
+      <div class="card"><h2 data-i18n="cn">China Phone Number Generator</h2><p data-i18n="cnDesc">Create real-looking Chinese mobile numbers starting with +86 13x, 15x, 18x, 19x.</p><a class="btn" data-page="cn">Go to China Generator</a></div>
+      <div class="card"><h2 data-i18n="gb">UK Phone Number Generator</h2><p data-i18n="gbDesc">Instantly build authentic UK landline and mobile numbers in +44 7XXX XXX XXX format.</p><a class="btn" data-page="gb">Go to UK Generator</a></div>
+      <div class="card"><h2 data-i18n="in">India Phone Number Generator</h2><p data-i18n="inDesc">Get working Indian mobile numbers for every telecom circle with +91 9X XXX XXXXX pattern.</p><a class="btn" data-page="in">Go to India Generator</a></div>
+      <div class="card"><h2 data-i18n="de">Germany Phone Number Generator</h2><p data-i18n="deDesc">Produce valid German landline and mobile numbers complying with +49 XXX XXX XXXXX.</p><a class="btn" data-page="de">Go to Germany Generator</a></div>
+    </div>
+  </section>
+
+  <!-- 2️⃣ 各国独立页面 -->
+  <section id="us" class="page"><div class="card"><h2 data-i18n="us">US Phone Number Generator</h2><p data-i18n="usDesc">Generate valid US phone numbers in <strong>+1 (NXX)-NXX-XXXX</strong> format for all 50 states.</p><button class="btn" onclick="generate('US')" data-i18n="genBtn">Generate US Number</button><p id="result-us" style="margin-top:1rem;font-weight:600"></p><a class="btn" style="margin-top:1rem" data-page="home" data-i18n="back">← Back to Home</a></div></section>
+  <section id="cn" class="page"><div class="card"><h2 data-i18n="cn">China Phone Number Generator</h2><p data-i18n="cnDesc">Create real-looking Chinese mobile numbers starting with <strong>+86 13x, 15x, 18x, 19x</strong>.</p><button class="btn" onclick="generate('CN')"  data-i18n="genBtn">Generate China Number</button><p id="result-cn" style="margin-top:1rem;font-weight:600"></p><a class="btn" style="margin-top:1rem" data-page="home" data-i18n="back">← Back to Home</a></div></section>
+  <section id="gb" class="page"><div class="card"><h2 data-i18n="gb">UK Phone Number Generator</h2><p data-i18n="gbDesc">Instantly build authentic UK landline and mobile numbers in <strong>+44 7XXX XXX XXX</strong> format.</p><button class="btn" onclick="generate('GB')" data-i18n="genBtn">Generate UK Number</button><p id="result-gb" style="margin-top:1rem;font-weight:600"></p><a class="btn" style="margin-top:1rem" data-page="home" data-i18n="back">← Back to Home</a></div></section>
+  <section id="in" class="page"><div class="card"><h2 data-i18n="in">India Phone Number Generator</h2><p data-i18n="inDesc">Get working Indian mobile numbers for every telecom circle with <strong>+91 9X XXX XXXXX</strong> pattern.</p><button class="btn" onclick="generate('IN')" data-i18n="genBtn">Generate India Number</button><p id="result-in" style="margin-top:1rem;font-weight:600"></p><a class="btn" style="margin-top:1rem" data-page="home" data-i18n="back">← Back to Home</a></div></section>
+  <section id="de" class="page"><div class="card"><h2 data-i18n="de">Germany Phone Number Generator</h2><p data-i18n="deDesc">Produce valid German landline and mobile numbers complying with <strong>+49 XXX XXX XXXXX</strong>.</p><button class="btn" onclick="generate('DE')" data-i18n="genBtn">Generate Germany Number</button><p id="result-de" style="margin-top:1rem;font-weight:600"></p><a class="btn" style="margin-top:1rem" data-page="home" data-i18n="back">← Back to Home</a></div></section>
+</main>
+
+<footer>© 2025 Phone Number Generator. All generated numbers are for testing purposes only.</footer>
+
+<script>
+  /* 随机号生成示例 */
+  function generate(country){
+    const rand=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+    let res='';
+    switch(country){
+      case 'US': res=`+1 (${rand(2,9)}${rand(0,9)}${rand(0,9)}) ${rand(2,9)}${rand(0,9)}${rand(0,9)}-${rand(1,9)}${rand(0,9)}${rand(0,9)}${rand(0,9)}`;break;
+      case 'CN': res=`+86 1${[3,5,7,8,9][rand(0,4)]}${rand(0,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)} ${rand(1,9)}${rand(0,9)}${rand(0,9)}${rand(0,9)}`;break;
+      case 'GB': res=`+44 7${rand(1,9)}${rand(0,9)}${rand(0,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)}`;break;
+      case 'IN': res=`+91 9${rand(1,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)} ${rand(1,9)}${rand(0,9)}${rand(0,9)}${rand(0,9)}${rand(0,9)}`;break;
+      case 'DE': res=`+49 1${rand(5,7)}${rand(0,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)} ${rand(0,9)}${rand(0,9)}${rand(0,9)}${rand(0,9)}`;break;
+    }
+    document.getElementById('result-'+country.toLowerCase()).textContent = res;
+  }
+
+  /* 页面切换 + 高亮 */
+  function showPage(pageId){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.country-nav a').forEach(a=>a.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    document.querySelector(`.country-nav a[data-page="${pageId}"]`)?.classList.add('active');
+  }
+  document.querySelectorAll('[data-page]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.preventDefault();
+      showPage(el.dataset.page);
+      history.pushState(null,'','#'+el.dataset.page);
+    });
+  });
+  /* 首次加载或前进/后退 */
+  window.addEventListener('popstate',()=>showPage(location.hash.slice(1) || 'home'));
+  showPage(location.hash.slice(1) || 'home');
+
+const i18n = {
+  en:{
+    title:'Phone Number Generator',
+    desc:'Free phone number generator for 200+ countries.',
+    home:'Home',
+    us:'US',
+    cn:'China',
+    gb:'UK',
+    in:'India',
+    de:'Germany',
+    usDesc:'Generate valid US phone numbers in +1 (NXX)-NXX-XXXX format for all 50 states.',
+    cnDesc:'Create real-looking Chinese mobile numbers starting with +86 13x, 15x, 18x, 19x.',
+    gbDesc:'Instantly build authentic UK landline and mobile numbers in +44 7XXX XXX XXX format.',
+    inDesc:'Get working Indian mobile numbers for every telecom circle with +91 9X XXX XXXXX pattern.',
+    deDesc:'Produce valid German landline and mobile numbers complying with +49 XXX XXX XXXXX.', 
+    genBtn:'Generate',
+    back:'← Back to Home',
+    // …继续补充
+  },
+  hi: {
+  title: 'फ़ोन नंबर जनरेटर',
+  desc: '200+ देशों के लिए मुफ़्त फ़ोन नंबर जनरेटर। परीक्षण, QA या विकास के लिए तुरंत मान्य स्थानीय नंबर बनाएं।',
+  home: 'होम',
+  us: 'संयुक्त राज्य अमेरिका',
+  cn: 'चीन',
+  gb: 'यूनाइटेड किंगडम',
+  in: 'भारत',
+  de: 'जर्मनी',
+  genBtn: 'जनरेट करें',
+  back: '← वापस होम पर',
+  usDesc: 'सभी 50 राज्यों के लिए +1 (NXX)-NXX-XXXX प्रारूप में मान्य अमेरिकी फ़ोन नंबर बनाएं।',
+  cnDesc: '+86 13x, 15x, 18x, 19x से शुरू होने वाले यथार्थ चीनी मोबाइल नंबर तैयार करें।',
+  gbDesc: 'तुरंत यथार्थ यूके लैंडलाइन और मोबाइल नंबर +44 7XXX XXX XXX प्रारूप में बनाएं।',
+  inDesc: 'हर टेलीकॉम सर्कल के लिए +91 9X XXX XXXXX पैटर्न पर आधारित कार्यशील भारतीय मोबाइल नंबर प्राप्त करें।',
+  deDesc: '+49 XXX XXX XXXXX प्रारूप का अनुसरण करते हुए मान्य जर्मन लैंडलाइन और मोबाइल नंबर तैयार करें।'
+  },
+  tl: {
+  title: 'Tagapaglikha ng Numero ng Telepono',
+  desc: 'Libreng tagapaglikha ng numero ng telepono para sa mahigit 200 bansa. Agad na gumawa ng mga totoong numerong pampook para sa pagsusulit, QA, o pag-unlad.',
+  home: 'Home',
+  us: 'Estados Unidos',
+  cn: 'Tsina',
+  gb: 'United Kingdom',
+  in: 'India',
+  de: 'Alemanya',
+  genBtn: 'I-generate',
+  back: '← Bumalik sa Home',
+  // 新增：各国卡片描述
+  usDesc: 'Maglikha ng valid na mga numero ng telepono sa Estados Unidos sa format na +1 (NXX)-NXX-XXXX para sa lahat ng 50 estado.',
+  cnDesc: 'Gumawa ng realistiko mga mobile number mula sa Tsina na nagsisimula sa +86 13x, 15x, 18x, 19x.',
+  gbDesc: 'Bumuo agad ng totoong UK landline at mobile numbers sa format na +44 7XXX XXX XXX.',
+  inDesc: 'Kumuha ng gumaganang Indian mobile numbers para sa bawat telecom circle sa pattern na +91 9X XXX XXXXX.',
+  deDesc: 'Maglikha ng valid na mga landline at mobile numbers sa Alemanya na sumusunod sa +49 XXX XXX XXXXX.'
+  }
+ };
+
+ const defaultLang = 'en';
+let currentLang = localStorage.getItem('lang') || defaultLang;
+
+function applyLanguage(lang){
+  if(!i18n[lang]) lang = defaultLang;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+
+  // 更新 <html lang="">
+  document.documentElement.lang = lang;
+
+  // 更新带 data-i18n 的元素
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    el.textContent = i18n[lang][key] || key;
+  });
+
+  // 高亮当前语言按钮
+  document.querySelectorAll('.language-list a').forEach(a=>a.classList.remove('curr'));
+  document.querySelector(`.language-list a[href="./"][data-lang="${lang}"]`)?.classList.add('curr');
+}
+
+/* 初始渲染 */
+applyLanguage(currentLang);
+
+/* 绑定点击事件 */
+document.querySelectorAll('.language-list a').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    applyLanguage(link.dataset.lang);
+  });
+});
+
+</script>
+</body>
+</html>
