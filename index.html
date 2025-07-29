@@ -2,20 +2,207 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title id="pageTitle">毒鸡汤生成器 · Sour Soup Quotes</title>
+  <title>毒鸡汤生成器 · Sour Soup Quotes</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" id="pageDescription" content="每日一句毒鸡汤/负能量英文语录，一键切换！">
+  <meta name="description" content="每日一句毒鸡汤/负能量英文语录，一键切换！">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;}
-    body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#ffecec;color:#333;padding:20px;}
-    .card{max-width:450px;width:100%;padding:40px 30px;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.08);text-align:center;}
-    h1{font-size:24px;margin-bottom:8px;color:#ff4757;}
-    #quote{font-size:20px;line-height:1.6;margin:20px 0;min-height:120px;font-weight:500;color:#333;}
-    button{cursor:pointer;background:#ff4757;color:#fff;border:none;padding:12px 28px;border-radius:30px;font-size:16px;margin:5px;transition:.3s;}
-    button:hover{background:#ff3742;}
-    .footer{margin-top:30px;font-size:13px;color:#999;}
-    .footer a{color:#ff4757;text-decoration:none;}
-    .lang-indicator{font-size:12px;color:#999;margin-top:10px;}
+    
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      background: linear-gradient(135deg, #ffecec 0%, #ffd1d1 100%);
+      color:#333;
+      padding:20px;
+      position: relative;
+    }
+    
+    .card{
+      max-width:450px;
+      width:100%;
+      padding:40px 30px;
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 10px 40px rgba(255,71,87,0.15);
+      text-align:center;
+      position: relative;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(255,71,87,0.25);
+    }
+    
+    h1{
+      font-size:26px;
+      margin-bottom:12px;
+      color:#ff4757;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(255,71,87,0.1);
+    }
+    
+    #quote{
+      font-size:20px;
+      line-height:1.7;
+      margin:25px 0;
+      min-height:120px;
+      font-weight:500;
+      color:#333;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255,71,87,0.05);
+      border-left: 4px solid #ff4757;
+      transition: all 0.3s ease;
+    }
+    
+    #quote.fade-in {
+      animation: fadeInUp 0.5s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    button{
+      cursor:pointer;
+      background: linear-gradient(45deg, #ff4757, #ff6b6b);
+      color:#fff;
+      border:none;
+      padding:14px 30px;
+      border-radius:30px;
+      font-size:16px;
+      font-weight: 600;
+      margin:5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255,71,87,0.3);
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+    }
+    
+    button:active {
+      transform: scale(0.95);
+    }
+    
+    .btn-secondary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+    }
+    
+    .btn-secondary:hover {
+      box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+    }
+    
+    .footer{
+      margin-top:35px;
+      font-size:13px;
+      color:#999;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .footer a{
+      color:#ff4757;
+      text-decoration:none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      background: rgba(255,71,87,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .footer a:hover {
+      background: rgba(255,71,87,0.2);
+      transform: translateY(-1px);
+    }
+    
+    .shortcut-hint {
+      font-size: 11px;
+      color: #999;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+    
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .card {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+      
+      h1 {
+        font-size: 22px;
+      }
+      
+      #quote {
+        font-size: 18px;
+        min-height: 100px;
+      }
+      
+      button {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -23,137 +210,185 @@
     <h1 id="title">毒鸡汤生成器</h1>
     <p id="quote">点击按钮，收获今日份扎心！</p>
 
-    <button id="generateBtn" onclick="generate()">再来一句</button>
-    <button id="langBtn" onclick="toggleLang()">EN/中</button>
+    <div class="button-group">
+      <button onclick="generate()" id="generateBtn">再来一句</button>
+      <button onclick="toggleLang()" id="toggleBtn" class="btn-secondary">EN/中</button>
+    </div>
 
     <div class="footer">
-      <a id="coffeeLink" href="https://ko-fi.com/yourname" target="_blank">☕ Buy me a coffee</a>
-      &nbsp;·&nbsp;
-      <a href="javascript:shareIt()" id="shareLink">📢 Share</a>
+      <a href="https://ko-fi.com/yourname" target="_blank">☕ Buy me a coffee</a>
+      <a href="javascript:shareIt()">📢 Share</a>
+      <div class="shortcut-hint">
+        <span id="shortcutHint">空格键生成 · L键切换语言</span>
+      </div>
     </div>
-    
-    <div class="lang-indicator" id="langIndicator">当前语言：中文</div>
   </div>
 
   <script>
-    /* 语料库：中文 + 英文 */
-    const data = {
-      zh: [
-        "努力不一定成功，但不努力一定很轻松。",
-        "世上无难事，只要肯放弃。",
-        "假如生活欺骗了你，不要悲伤，打开美颜欺骗生活。",
-        "没有人能让你放弃梦想，你自己想想就会放弃了。",
-        "比你优秀的人还在努力，那你努力还有什么用？",
-        "条条大路通罗马，而有些人就生在罗马。",
-        "失败并不可怕，可怕的是你还相信这句话。",
-        "你并不是一无所有，你还有病。",
-        "有时候你不努力一下，就不知道什么叫绝望。",
-        "上帝是公平的，给了你丑的外表，一定也会给你低的智商。"
-      ],
-      en: [
-        "Hard work may not lead to success, but giving up definitely feels easier.",
-        "Nothing is impossible — as long as you're willing to quit.",
-        "If life cheats you, don't be sad; open a beauty filter and cheat life back.",
-        "No one can make you abandon your dreams; you'll drop them yourself after some thought.",
-        "If people better than you are still grinding, then what's the point of your grind?",
-        "All roads lead to Rome, but some people are born there.",
-        "Failure isn't scary; what's scary is that you still believe this quote.",
-        "You're not completely broke — you still have your issues.",
-        "Sometimes you need to try harder just to realize how hopeless it really is.",
-        "God is fair: if you're ugly, He'll also give you a low IQ."
-      ]
-    };
+    /* 语料库：中文 + 英文  共 20 组 */
+  const data = {
+  zh: [
+    "努力不一定成功，但不努力一定很轻松。",
+    "世上无难事，只要肯放弃。",
+    "假如生活欺骗了你，不要悲伤，打开美颜欺骗生活。",
+    "没有人能让你放弃梦想，你自己想想就会放弃了。",
+    "比你优秀的人还在努力，那你努力还有什么用？",
+    "条条大路通罗马，而有些人就生在罗马。",
+    "失败并不可怕，可怕的是你还相信这句话。",
+    "你并不是一无所有，你还有病。",
+    "有时候你不努力一下，就不知道什么叫绝望。",
+    "上帝是公平的，给了你丑的外表，一定也会给你低的智商。",
+    // ↓↓↓ 新增 10 条 ↓↓↓
+    "熬夜是因为没有勇气结束今天，赖床是因为没有勇气开始明天。",
+    "长得丑就是病，不然整形医院为什么叫医院？",
+    "假如今天生活欺骗了你，不要悲伤，明天它还会继续。",
+    "世上无难事，只怕有钱人。",
+    "你对生活有无数种期待，而生活对你只有一种安排——算了。",
+    "别低头，双下巴会暴露；别抬头，发际线会回应。",
+    "成年人的世界没有容易二字，容易胖、容易秃、容易穷。",
+    "你以为有钱人很快乐吗？不，他们的快乐你根本想象不到。",
+    "努力过后才知道，天赋有多重要。",
+    "人生就像打电话，不是你先挂，就是我先挂。"
+  ],
+  en: [
+    "Hard work may not lead to success, but giving up definitely feels easier.",
+    "Nothing is impossible — as long as you’re willing to quit.",
+    "If life cheats you, don’t be sad; open a beauty filter and cheat life back.",
+    "No one can make you abandon your dreams; you’ll drop them yourself after some thought.",
+    "If people better than you are still grinding, then what’s the point of your grind?",
+    "All roads lead to Rome, but some people are born there.",
+    "Failure isn’t scary; what’s scary is that you still believe this quote.",
+    "You’re not completely broke — you still have your issues.",
+    "Sometimes you need to try harder just to realize how hopeless it really is.",
+    "God is fair: if you’re ugly, He’ll also give you a low IQ.",
+    // ↓↓↓ 10 NEW ↓↓↓
+    "You stay up late because you lack the guts to end today, and stay in bed because you lack the guts to start tomorrow.",
+    "Being ugly is a disease; otherwise why would plastic-surgery clinics be called hospitals?",
+    "If today deceives you, don’t be sad — tomorrow it will keep doing it.",
+    "Nothing is impossible — except for the poor.",
+    "You have a thousand expectations from life; life has only one plan for you — never mind.",
+    "Don’t lower your head, the double chin will show; don’t raise it, the hairline will wave.",
+    "Adult life has no word for ‘easy’ — only easy to gain weight, easy to go bald, easy to go broke.",
+    "Do you think rich people are happy? No, their happiness is beyond your imagination.",
+    "Only after trying hard do you realize how important talent is.",
+    "Life is like a phone call: either you hang up first, or I do."
+   ]
+  };
 
-    // 完整的国际化文本配置
-    const i18n = {
-      zh: {
-        title: '毒鸡汤生成器',
-        pageTitle: '毒鸡汤生成器 · Sour Soup Quotes',
-        pageDescription: '每日一句毒鸡汤/负能量英文语录，一键切换！',
-        generateBtn: '再来一句',
-        langBtn: 'EN',
-        coffeeLink: '☕ 请我喝咖啡',
-        shareLink: '📢 分享',
-        langIndicator: '当前语言：中文',
-        shareSuccess: '已复制到剪贴板！',
-        defaultQuote: '点击按钮，收获今日份扎心！'
-      },
-      en: {
-        title: 'Sour Soup Generator',
-        pageTitle: 'Sour Soup Generator · 毒鸡汤生成器',
-        pageDescription: 'Daily sour soup quotes and negative energy in English, one-click switch!',
-        generateBtn: 'Another One',
-        langBtn: '中',
-        coffeeLink: '☕ Buy me a coffee',
-        shareLink: '📢 Share',
-        langIndicator: 'Current Language: English',
-        shareSuccess: 'Copied to clipboard!',
-        defaultQuote: 'Click the button to get your daily dose of reality!'
-      }
-    };
+    let lang = 'zh';                 // 默认中文
+    const title = {zh:'毒鸡汤生成器', en:'Sour Soup Generator'};
+    const btnText = {zh:'再来一句', en:'Another One'};
+    const defaultText = {zh:'点击按钮，收获今日份扎心！', en:'Click the button to get your daily dose of reality!'};
+    const shortcutHint = {zh:'空格键生成 · L键切换语言', en:'Space to generate · L to switch language'};
 
-    // 从localStorage获取语言设置，默认为中文
-    let lang = localStorage.getItem('preferredLanguage') || 'zh';
+    /* 创建涟漪效果 */
+    function createRipple(event) {
+      const button = event.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - size / 2;
+      const y = event.clientY - rect.top - size / 2;
+      
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.className = 'ripple';
+      
+      button.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    }
 
     /* 首次加载 */
-    updateLanguage();
     generate();
-
-    function updateLanguage() {
-      // 更新页面标题和描述
-      document.getElementById('pageTitle').textContent = i18n[lang].pageTitle;
-      document.getElementById('pageDescription').setAttribute('content', i18n[lang].pageDescription);
-      
-      // 更新页面内容
-      document.getElementById('title').textContent = i18n[lang].title;
-      document.getElementById('generateBtn').textContent = i18n[lang].generateBtn;
-      document.getElementById('langBtn').textContent = i18n[lang].langBtn;
-      document.getElementById('coffeeLink').textContent = i18n[lang].coffeeLink;
-      document.getElementById('shareLink').textContent = i18n[lang].shareLink;
-      document.getElementById('langIndicator').textContent = i18n[lang].langIndicator;
-      
-      // 更新HTML lang属性
-      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-      
-      // 保存语言设置到localStorage
-      localStorage.setItem('preferredLanguage', lang);
-    }
+    
+    // 初始化页面语言
+    updatePageLanguage();
 
     function generate() {
       const list = data[lang];
       const idx = Math.floor(Math.random() * list.length);
-      document.getElementById('quote').textContent = list[idx];
+      const quoteElement = document.getElementById('quote');
+      
+      // 添加淡入动画
+      quoteElement.classList.remove('fade-in');
+      void quoteElement.offsetWidth; // 触发重排
+      quoteElement.classList.add('fade-in');
+      
+      // 延迟更新文本，让动画更流畅
+      setTimeout(() => {
+        quoteElement.textContent = list[idx];
+      }, 150);
+      
+      // 按钮点击效果
+      const generateBtn = document.getElementById('generateBtn');
+      generateBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        generateBtn.style.transform = 'scale(1)';
+      }, 150);
     }
 
     function toggleLang() {
       lang = lang === 'zh' ? 'en' : 'zh';
-      updateLanguage();
+      updatePageLanguage();
       generate();  // 切换语言后立刻刷新一句
+    }
+    
+    function updatePageLanguage() {
+      // 更新标题
+      document.getElementById('title').textContent = title[lang];
+      
+      // 更新按钮文本
+      document.getElementById('generateBtn').textContent = btnText[lang];
+      document.getElementById('toggleBtn').textContent = lang === 'zh' ? 'EN' : '中';
+      
+      // 更新默认文本（如果当前显示的是默认文本）
+      const quoteElement = document.getElementById('quote');
+      const currentText = quoteElement.textContent;
+      const zhDefault = defaultText.zh;
+      const enDefault = defaultText.en;
+      
+      if (currentText === zhDefault || currentText === enDefault) {
+        quoteElement.textContent = defaultText[lang];
+      }
+      
+      // 更新快捷键提示
+      document.getElementById('shortcutHint').textContent = shortcutHint[lang];
     }
 
     function shareIt() {
-      const text = document.getElementById('quote').textContent + " ——" + i18n[lang].title;
+      const text = document.getElementById('quote').textContent + " ——" + title[lang];
       if (navigator.share) {
-        navigator.share({
-          title: i18n[lang].title, 
-          text, 
-          url: location.href
-        });
+        navigator.share({title:title[lang], text, url:location.href});
       } else {
         navigator.clipboard.writeText(text + "\n" + location.href);
-        alert(i18n[lang].shareSuccess);
+        alert(lang==='zh' ? "已复制到剪贴板！" : "Copied to clipboard!");
       }
     }
-
+    
     // 添加键盘快捷键支持
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
+    document.addEventListener('keydown', function(event) {
+      // 空格键生成新语录
+      if (event.code === 'Space' && event.target === document.body) {
+        event.preventDefault();
         generate();
-      } else if (e.key === 'l' || e.key === 'L') {
-        e.preventDefault();
+      }
+      // L键切换语言
+      if (event.code === 'KeyL' && event.target === document.body) {
+        event.preventDefault();
         toggleLang();
       }
+    });
+
+    // 为所有按钮添加涟漪效果
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(button => {
+        button.addEventListener('click', createRipple);
+      });
     });
   </script>
 </body>
